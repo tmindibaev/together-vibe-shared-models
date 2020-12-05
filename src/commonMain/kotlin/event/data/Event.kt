@@ -1,12 +1,20 @@
-package togethervibe.api.event.load.data
+package event.data
 
-import java.time.ZonedDateTime
 import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+import kotlin.js.JsName
 
 @ExperimentalJsExport
+@JsExport
+@JsName("Event")
 data class Event(
     val name: String,
-    val date: ZonedDateTime? = null,
-    val place: String? = null,
-    val extras: Map<EventExtraType, String> = emptyMap()
+    // TODO: seems like IR compiler can't compile Nullable types into js yet
+    // val date: String? = null,
+    // val place: String? = null
+    val date: String,
+    val place: String
+    // TODO: think about non-exportable types
+    // comment by authors: w: source-map argument is not supported yet
+    // val extras: Map<EventExtraType, String> = emptyMap()
 )
