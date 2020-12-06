@@ -31,21 +31,21 @@ npmPublishing {
             registry = uri("https://registry.npmjs.org")
         }
     }
-    version = "v1.0.0"
+    version = "v1.0.4"
     publications {
         publication("customPublication") { //Custom publication
             bundleKotlinDependencies = true // Overrides the global default for this publication
             shrinkwrapBundledDependencies = true // Overrides the global default for this publication
             nodeJsDir =
                 file("~/nodejs") // NodeJs home directory. Defaults to $NODE_HOME if present or kotlinNodeJsSetup output for default publications
-            moduleName = "together-vibe-shared-modules" // Defaults to project name
+            moduleName = "together-vibe-shared-models" // Defaults to project name
             scope = "together-vibe" // Defaults to global organisation
             readme = file("README.MD") // Defaults to global readme
             destinationDir =
                 file("$buildDir/vipPackage") // Package collection directory, defaults to File($buildDir/publications/npm/$name")
-            main = "together-vibe-shared-modules-js.js" // Main output file name, set automatically for default publications
+            main = "together-vibe-shared-models-js.js" // Main output file name, set automatically for default publications
             types =
-                "together-vibe-shared-modules.d.ts" // TS types output file name, set automatically for default publications
+                "together-vibe-shared-models.d.ts" // TS types output file name, set automatically for default publications
         }
     }
 }
