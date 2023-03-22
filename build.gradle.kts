@@ -1,25 +1,11 @@
 plugins {
-    kotlin("multiplatform") version "1.4.20"
-    id("lt.petuska.npm.publish") version "1.0.4"
+    id("dev.petuska.npm.publish") version "3.2.1"
+    kotlin("multiplatform") version "1.8.10"
     `maven-publish`
 }
 
 group = "together-vibe"
-version = "1.0.0"
-
-publishing {
-    publications {
-        create<MavenPublication>("together-vibe-shared-models") {
-            from(components["kotlin"])
-        }
-    }
-
-    repositories {
-        maven {
-            mavenCentral()
-        }
-    }
-}
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -59,7 +45,7 @@ kotlin {
             useJUnit()
         }
     }
-    js("ir", IR) {
+    js(IR) {
         binaries.library()
         browser() // or nodejs()
     }
@@ -80,6 +66,38 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-junit"))
             }
+        }
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("together-vibe-shared-models") {
+            from(components["kotlin"])
+        }
+    }
+
+    repositories {
+        maven {
+            mavenCentral()
+        }
+    }
+}
+
+npmPublish {
+    registries {
+        register("npmjs") {
+            uri.set("https://registry.npmjs.org")
+            authToken.set("5c7da04a-5631-4e00-aeeb-a610b86ee2fc") // TODO: do not push this anyware
+        }
+    }
+    packages {
+        register("together-vibe-shared-models") { // Custom publication
+            scope.set("together-vibe") // Defaults to global organisation
+            main.set("together-vibe-shared-models-js.js") // Main output file name, set automatically for default publications
+            types.set("together-vibe-shared-models.d.ts") // TS types output file name, set automatically for default publications
+            version.set("v1.0.4")
+            readme.set(file("README.MD"))
         }
     }
 }
