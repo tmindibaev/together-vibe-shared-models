@@ -88,7 +88,7 @@ npmPublish {
     registries {
         register("npmjs") {
             uri.set("https://registry.npmjs.org")
-            authToken.set("5c7da04a-5631-4e00-aeeb-a610b86ee2fc") // TODO: do not push this anyware
+            authToken.set("my-npm-token") // TODO: do not push this anyware
         }
     }
     packages {
